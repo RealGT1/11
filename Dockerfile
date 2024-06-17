@@ -1,13 +1,12 @@
-FROM python:3.8-slim
+# syntax=docker/dockerfile:1
+
+FROM python:3.8-slim-buster
 
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
-# Copy application code
 COPY . .
 
-# Run the Flask application
-CMD ["python", "app.py"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
